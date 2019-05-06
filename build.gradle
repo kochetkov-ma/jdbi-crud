@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "3.2.1"
+}
+
+group 'ru.iopump.jdbi'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+gradle.startParameter.logLevel = LogLevel.DEBUG
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+wrapper {
+    gradleVersion = '5.4'
+    distributionType = Wrapper.DistributionType.ALL
+}
+ext {
+    jdbiVersion = '3.8.2'
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jdbi:jdbi3-sqlobject:$jdbiVersion"
+    compile "org.jdbi:jdbi3-core:$jdbiVersion"
+    compile "org.jdbi:jdbi3-guava:$jdbiVersion"
+    compile "org.jdbi:jdbi3-jpa:$jdbiVersion"
+
+    //compile 'io.cucumber:cucumber-java:2.4.0'
+    compile 'javax.persistence:persistence-api:1.0.2'
+    compile 'org.awaitility:awaitility:3.1.6'
+    compile 'com.google.code.findbugs:jsr305:3.0.2'
+    compile 'org.apache.commons:commons-lang3:3.9'
+    compile 'org.junit.platform:junit-platform-commons:1.2.0'
+    compile group: 'io.cucumber', name: 'datatable', version: '1.1.12'
+    compile group: 'com.jcabi', name: 'jcabi-matchers', version: '1.4'
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
+    testCompile group: 'org.zapodot', name: 'embedded-db-junit', version: '1.1.1'
+    testCompile "org.mockito:mockito-core:2.26.0"
+    testCompile group: 'org.assertj', name: 'assertj-guava', version: '3.2.1'
+}
